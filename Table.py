@@ -12,6 +12,9 @@ class Table:
         self.paquet = self.creer_paquet()
         self.evaluator = Evaluator()
 
+    def get_joueurs (self) : 
+        return self.joueurs
+    
     def creer_paquet(self):
         valeurs = list(range(2, 15))  # 2 à 14 (As)
         couleurs = ['H', 'D', 'C', 'S']  # Coeur, Carreau, Trèfle, Pique
@@ -20,9 +23,12 @@ class Table:
             for valeur in valeurs:
                 paquet.append(Carte(valeur, couleur))
         return paquet
-
+    
     def melanger_paquet(self):
         random.shuffle(self.paquet)
+        
+    def montrer_paquet(self):
+        print(self.paquet)
 
     def ajouter_joueur(self, joueur):
         self.joueurs.append(joueur)
@@ -57,7 +63,16 @@ class Table:
         return gagnant
 
     def __repr__(self):
-        return f"Table avec joueurs: {self.joueurs} et cartes communes: {self.cartes_communes}"
+        joueurs = '\n'.join(map(str, self.joueurs)) if self.joueurs else "Aucun joueur"
+        cartes = '\n'.join(map(str, self.cartes_communes)) if self.cartes_communes else "Aucune carte"
+        return f"{joueurs} \n\nCartes communes:\n{cartes}"
 
-a = Table.creer_paquet()
-print(a)
+        # return f"Table avec joueurs: {self.joueurs} et cartes communes: {self.cartes_communes}"
+
+# t = Table()
+
+# a = t.creer_paquet()
+# print(a)
+
+# t.melanger_paquet()
+# t.montrer_paquet()

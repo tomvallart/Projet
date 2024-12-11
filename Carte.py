@@ -1,17 +1,17 @@
 # FILE: Carte.py
 
 class Carte:
-    def __init__(self, valeur, couleur):
-        self.valeur = valeur
-        self.couleur = couleur
+    def __init__(self, valeur : str, couleur : str):
+        str : self.valeur = valeur
+        str : self.couleur = couleur
 
-    def get_valeur(self):
+    def get_valeur(self) -> int:
         return self.valeur
 
     def set_valeur(self, valeur):
         self.valeur = valeur
 
-    def get_couleur(self):
+    def get_couleur(self) -> str:
         return self.couleur
 
     def set_couleur(self, couleur):
