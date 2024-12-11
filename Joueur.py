@@ -9,6 +9,11 @@ class Joueur:
     def recevoir_carte(self, carte):
         self.cartes.append(carte)
 
+        
+    def recevoir_carte_rd(self, carte):
+        # attribue une carte aléatoire
+        self.cartes.append(carte)
+
     def miser(self, montant):
         if montant > self.jetons:
             raise ValueError("Montant de la mise supérieur aux jetons disponibles")

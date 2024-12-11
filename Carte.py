@@ -5,7 +5,18 @@ class Carte:
         self.valeur = valeur
         self.couleur = couleur
 
-    def 
+    def get_valeur(self):
+        return self.valeur
+
+    def set_valeur(self, valeur):
+        self.valeur = valeur
+
+    def get_couleur(self):
+        return self.couleur
+
+    def set_couleur(self, couleur):
+        self.couleur = couleur
+
 
     # Équivalent au ToString
     def __repr__(self):
@@ -15,5 +26,5 @@ class Carte:
         couleur = couleurs[self.couleur]
         return f"{valeur} de {couleur}"
 
-carte = Carte(2,"H")
-print(carte)
+# carte = Carte(2,"H")
+# print(carte)
