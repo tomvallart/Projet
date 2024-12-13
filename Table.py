@@ -12,7 +12,7 @@ class Table:
         self.paquet = self.creer_paquet()
         self.evaluator = Evaluator()
 
-    def get_joueurs (self) : 
+    def get_joueurs(self) :
         return self.joueurs
     
     def creer_paquet(self):
@@ -47,7 +47,14 @@ class Table:
 
     def distribuer_river(self):
         self.cartes_communes.append(self.paquet.pop())
-
+    
+    def joueurs_actifs(self):
+        joueurs_actifs = []
+        for joueur in self.joueurs:
+            if joueur.get_jetons() > 0:
+                joueurs_actifs.append(joueur)
+        return joueurs_actifs
+    
     def evaluer_meilleure_combinaison(self):
         meilleures_mains = {}
         cartes_communes_treys = []

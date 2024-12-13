@@ -2,8 +2,8 @@
 
 class Carte:
     def __init__(self, valeur : str, couleur : str):
-        str : self.valeur = valeur
-        str : self.couleur = couleur
+        self.valeur = valeur
+        self.couleur = couleur
 
     def get_valeur(self) -> int:
         return self.valeur

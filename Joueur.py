@@ -2,13 +2,16 @@
 
 class Joueur:
     def __init__(self, nom : str, jetons : int):
-        str : self.nom = nom
-        int : self.jetons = jetons
-        list : self.cartes = []
-        bool : self.couche = False
+        self.nom = nom
+        self.jetons = jetons
+        self.cartes = []
+        self.couche = False
 
     def recevoir_carte(self, carte):
         self.cartes.append(carte)
+    
+    def reset_cartes(self):
+        self.cartes.clear()
 
     def miser(self, montant : int) -> int:
         if montant > self.jetons:
@@ -20,11 +23,14 @@ class Joueur:
         self.cartes = []
         self.couche = True
     
-    def is_couche(self) -> bool:
+    def est_couche(self) -> bool:
         return self.couche
     
     def get_nom(self) -> str:
         return self.nom
+    
+    def get_jetons(self) -> str:
+        return self.jetons
 
     def __repr__(self) -> str:
         return f"Joueur {self.nom} avec {self.jetons} jetons et cartes: {self.cartes}"
