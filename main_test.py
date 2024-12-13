@@ -27,11 +27,11 @@ def main():
         else :
             table.ajouter_joueur(Joueur(joueur, 100))
         
+
     partie_finie = False
 
-    # Lancement de la partie
     while not partie_finie:
-        # VérifieVérification des joueurs actifs
+        # Vérifier les joueurs actifs
         joueurs_actifs = table.joueurs_actifs()
 
         if len(joueurs_actifs) == 1:
@@ -39,7 +39,7 @@ def main():
             partie_finie = True
             break
 
-        # Préparation de la manche
+        # Préparer la manche
         table.creer_paquet()
         table.melanger_paquet()
         table.distribuer_cartes()
@@ -50,10 +50,9 @@ def main():
         nb_joueurs_couches = 0
         index = 0
 
-        # Lancement d'une manche
         while not manche_finie:
             print("-----------------------------------------------------------")
-            table.print_table()
+            print(table)
             joueurs_actifs = table.joueurs_actifs()
             if len(joueurs_actifs) == 1:
                 print(f"{joueurs_actifs[0].get_nom()} remporte la manche et gagne {cagnotte} jetons !")
@@ -73,18 +72,18 @@ def main():
             choix = int(input("Votre choix : "))
 
             if choix == 1:
-                montant = int(input("\nMontant de la mise : "))
+                montant = int(input("Montant de la mise : "))
                 joueur_actuel.miser(montant)
                 cagnotte += montant
-                print(f"\n{joueur_actuel.get_nom()} mise {montant} jetons. La cagnotte est maintenant de {cagnotte}.")
+                print(f"{joueur_actuel.get_nom()} mise {montant} jetons. La cagnotte est maintenant de {cagnotte}.")
                 index += 1
             elif choix == 2:
                 joueur_actuel.se_coucher()
-                print(f"\n{joueur_actuel.get_nom()} s'est couché.")
+                print(f"{joueur_actuel.get_nom()} s'est couché.")
                 nb_joueurs_couches += 1
                 index += 1
             else:
-                print("\nMauvaise nouvelle, il faut mieux jouer :). Veuillez choisir 1 ou 2.")
+                print("auvaise nouvelle, il faut mieux jouer :) Veuillez choisir 1 ou 2.")
 
             # Gestion des étape de distribution de cartes
             if index == len(joueurs_actifs):
@@ -102,7 +101,6 @@ def main():
         # Réinitialiser les mains de chaque joueur actif
         for joueur in table.get_joueurs():
             joueur.reset_cartes()
-        table.reset_paquet()
 
 if __name__ == '__main__':
     main()

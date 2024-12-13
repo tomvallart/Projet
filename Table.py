@@ -9,11 +9,15 @@ class Table:
     def __init__(self):
         self.joueurs = []
         self.cartes_communes = []
-        self.paquet = self.creer_paquet()
+        self.paquet = []
         self.evaluator = Evaluator()
 
     def get_joueurs(self) :
         return self.joueurs
+    
+    def reset_paquet(self):
+        self.paquet = []
+        self.cartes_communes = []
     
     def creer_paquet(self):
         valeurs = list(range(2, 15))
@@ -22,7 +26,7 @@ class Table:
         for couleur in couleurs:
             for valeur in valeurs:
                 paquet.append(Carte(valeur, couleur))
-        return paquet
+        self.paquet = paquet
     
     def melanger_paquet(self):
         random.shuffle(self.paquet)
@@ -69,11 +73,17 @@ class Table:
         gagnant = min(meilleures_mains, key=meilleures_mains.get)
         return gagnant
 
-    def __repr__(self):
+    def print_table(self):
         joueurs = '\n'.join(map(str, self.joueurs)) if self.joueurs else "Aucun joueur"
         cartes = '\n'.join(map(str, self.cartes_communes)) if self.cartes_communes else "Aucune carte"
-        return f"{joueurs} \n\nCartes communes:\n{cartes}"
-
+        print(f"Il y a {len(self.joueurs)} joueurs à la table")
+        for joueur in self.joueurs:
+            print(f"\nJoueur {joueur.get_nom()} a les cartes : ")
+            for carte in joueur.get_cartes():
+                carte.affiche_treys_card()
+        print(f"\nLes cartes communes sont : ")
+        for carte in self.cartes_communes:
+            carte.affiche_treys_card()
         # return f"Table avec joueurs: {self.joueurs} et cartes communes: {self.cartes_communes}"
 
 # t = Table()

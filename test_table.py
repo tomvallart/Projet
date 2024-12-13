@@ -28,12 +28,9 @@ def test_evaluer_meilleure_combinaison():
         Carte(7, 'D'),   # 7 de Carreau
         Carte(6, 'C')    # 6 de Trèfle
     ]
-    cartes_str = ' '
-    for carte in table.cartes_communes:
-        # carte.affiche_treys_card()
-        cartes_str.join([carte.pretty_print() for carte in self.cartes])
+    
+    table.print_table()
 
-    print(cartes_str)
     # Évaluer la meilleure combinaison
     gagnant = table.evaluer_meilleure_combinaison()
 

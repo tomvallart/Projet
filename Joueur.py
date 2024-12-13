@@ -1,3 +1,5 @@
+from treys import Card
+
 class Joueur:
     """
     Classe représentant un joueur dans un jeu de cartes avec un système de mise.
@@ -19,7 +21,7 @@ class Joueur:
         self.jetons = jetons
         self.cartes = []
         self.couche = False
-
+    
     def recevoir_carte(self, carte):
         """
         Ajoute une carte à la main du joueur.
@@ -90,6 +92,14 @@ class Joueur:
             montant (int): Le nombre de jetons à ajouter.
         """
         self.jetons += montant
+    
+    def get_cartes(self):
+        """
+        Obtient les cartes du joueur.
+        Returns:
+            list: Les cartes du joueur.
+        """
+        return self.cartes
 
     def __repr__(self) -> str:
         """
@@ -97,4 +107,4 @@ class Joueur:
         Returns:
             str: Une chaîne représentant le joueur, ses jetons et ses cartes.
         """
-        return f"Joueur {self.nom} avec {self.jetons} jetons et cartes: {self.cartes}"
+        return f"Joueur {self.nom} avec {self.jetons} jetons et cartes: "
