@@ -16,7 +16,7 @@ class Table:
         return self.joueurs
     
     def creer_paquet(self):
-        valeurs = list(range(2, 15))  # 2 à 14 (As)
+        valeurs = list(range(2, 15))
         couleurs = ['H', 'D', 'C', 'S']  # Coeur, Carreau, Trèfle, Pique
         paquet = []
         for couleur in couleurs:
@@ -59,11 +59,11 @@ class Table:
         meilleures_mains = {}
         cartes_communes_treys = []
         for carte in self.cartes_communes:
-            cartes_communes_treys.append(Card.new(str(carte)))
+            cartes_communes_treys.append(carte.treys_card)
         for joueur in self.joueurs:
             main_treys = []
             for carte in joueur.cartes:
-                main_treys.append(Card.new(str(carte)))
+                main_treys.append(carte.get_treys_card())
             score = self.evaluator.evaluate(cartes_communes_treys, main_treys)
             meilleures_mains[joueur] = score
         gagnant = min(meilleures_mains, key=meilleures_mains.get)

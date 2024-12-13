@@ -23,13 +23,15 @@ def main():
         else:
             table.ajouter_joueur(Joueur(joueur, 100))
     
-    nb_joueurs = len(table.get_joueurs())
     partie_finie = False
     manche_finie = False
     index = 0
-    etape = 0
+    cagnotte = 0
+    nb_jr_couches = 0
+
     while not partie_finie :
         j_actifs = table.joueurs_actifs()
+        nb_joueurs = len(j_actifs)
 
         if len(j_actifs) > 1:
             manche_finie = False
@@ -38,9 +40,9 @@ def main():
             partie_finie = True
             manche_finie = True
             
-            # etape = 0 : le flop = 3 premières cartes dévoilées
-            # etape = 1 : le turn = 1 carte dévoilée
-            # etape = 2 : le river = 1 carte dévoilée
+        # etape = 0 : le flop = 3 premières cartes dévoilées
+        # etape = 1 : le turn = 1 carte dévoilée
+        # etape = 2 : le river = 1 carte dévoilée
             
         while not manche_finie :
             if index == 0 :
@@ -52,8 +54,19 @@ def main():
             elif index == len(j_actifs) :
                 table.distribuer_turn()
 
-            elif index == len(j_actifs)*2 :
+            elif index == len(j_actifs) * 2 :
                 table.distribuer_river()
+
+            elif (index == len(j_actifs) * 3) or (nb_jr_couches == nb_joueurs-1):
+                gagnant_manche = table.evaluer_meilleure_combinaison()
+                print(f"Le gagnant de la manche est {gagnant_manche.get_nom()} et reçoit {cagnotte} jetons !")
+                manche_finie = True
+                index = 0
+                cagnotte = 0
+                nb_jr_couches = 0
+                gagnant_manche.recevoir_jetons(cagnotte)
+                break
+            # 
             
             print(table)
 
@@ -68,10 +81,12 @@ def main():
                 if reponse == 1:
                     montant = int(input('\nMontant de la mise : '))
                     joueur_actuel.miser(montant)
+                    cagnotte += montant
                     print(f"Le joueur {joueur_actuel.get_nom()} mise {montant} jetons")
                     index += 1
                 elif reponse == 2:
                     joueur_actuel.se_coucher()
+                    nb_jr_couches += 1
                     index += 1
                 else :
                     print("Mauvaise nouvelle, il faut mieux jouer :) Merci de choisir une action parmis la liste")
@@ -79,19 +94,11 @@ def main():
                 print(f"Le joueur {joueur_actuel.get_nom()} est couché il passe son tour")
                 index += 1
             
-            
-            
-            # si joueur n'a plus de jeton = eliminé = fin de partie
-        
-            # manche_finie = True
             print ("\n----------------------------------------------------------------------------\n")
         
-        # fin de la manche : on enlève les cartes de tous les joueurs
+        # fin de la manche : on enlève les cartes de la main des joueurs
         for joueur in table.get_joueurs():
             joueur.reset_cartes()
-
-        partie_finie = True
-
 
 if __name__ == '__main__':
     main()
