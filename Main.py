@@ -44,6 +44,7 @@ def main():
             
         while not manche_finie :
             if index == 0 :
+                table.creer_paquet()
                 table.melanger_paquet()
                 table.distribuer_cartes()
                 table.distribuer_flop()
